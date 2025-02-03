@@ -231,7 +231,7 @@ const HomePage = () => {
               default:
                 break;
             }
-          })
+          })()
         }
       </div>
     </>
