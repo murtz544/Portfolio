@@ -5,29 +5,29 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { clearAllUserErrors, login } from "@/store/slices/userSlice"
 import { toast } from "react-toastify"
+import SpecialLoadingButton from "@/pages/sub-components/SpecialLoadingButton"
 
-export function LoginForm({
-  className,
-  ...props
-}) {
+export function LoginForm({className, ...props}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {loading, isAuthenticated, error, message} = useSelector(state => state.user);
+    const { loading, isAuthenticated, error } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigateTo = useNavigate();
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
+        console.log("Dispatching login action..."); // Debug log
         dispatch(login(email, password));
-    }
+    };
 
     useEffect(() => {
-        if(error){
+        if(error) {
             toast.error(error);
             dispatch(clearAllUserErrors());
         }
-        if(isAuthenticated){
+        if(isAuthenticated) {
             navigateTo("/");
         }
     }, [dispatch, isAuthenticated, error, loading]);
@@ -56,24 +56,24 @@ export function LoginForm({
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    to="/password/forgot"
+                  <Link
+                    to={"/password/forgot"}
                     className="ml-auto text-sm underline-offset-2 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
                 <Input value={password}
                   onChange={(e) => setPassword(e.target.value)} type="password" required />
               </div>
-              <Button type="submit" className="w-full" onClick={handleLogin}>
-                Login
-              </Button>
-              <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                  Or continue with
-                </span>
-              </div>
+              {
+                loading ? 
+                    (<SpecialLoadingButton content={"Logging In"}/>) : 
+                    (<Button type="submit" className="w-full" onClick={handleLogin}>
+                        Login
+                    </Button>)
+              }
+              
               
             </div>
           </form>

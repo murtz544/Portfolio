@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import ForgotPassword from './pages/ForgotPassword';
@@ -10,14 +10,21 @@ import UpdateProject from './pages/UpdateProject';
 import Login from './pages/Login';
 import ManageProject from './pages/ManageProject';
 import { ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { getUser } from './store/slices/userSlice';
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
   return(
     <Router>
       <Routes>
         <Route path="/" element={<HomePage/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
-        <Route path="/password/forget" element={<ForgotPassword/>}></Route>
+        <Route path="/password/forgot" element={<ForgotPassword/>}></Route>
         <Route path="/password/reset/:token" element={<ResetPassword/>}></Route>
         <Route path="/manage/skills" element={<ManageSkills/>}></Route>
         <Route path="/manage/timeline" element={<ManageTimeline/>}></Route>
@@ -30,4 +37,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
