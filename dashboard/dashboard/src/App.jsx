@@ -12,6 +12,7 @@ import ManageProject from './pages/ManageProject';
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { getUser } from './store/slices/userSlice';
+import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
