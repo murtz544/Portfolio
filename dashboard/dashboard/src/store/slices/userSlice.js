@@ -154,7 +154,7 @@ export const updatePassword = (currentPassword, newPassword, confirmNewPassword)
     dispatch(userSlice.actions.updatePasswordRequest());
     try {
         const {data} = await axios.put(
-            "http://localhost:4000/api/v1/update/password",
+            "http://localhost:4000/api/v1/user/update/password",
             { currentPassword, newPassword, confirmNewPassword },
             { 
                 withCredentials: true,

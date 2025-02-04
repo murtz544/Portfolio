@@ -73,7 +73,7 @@ const UpdateProfile = () => {
         if (message) {
             toast.success(message);
         }
-    }, [dispatch, loading, error, isUpdated])
+    }, [dispatch, loading, error, isUpdated]);
     return (
         <>
             <div className="w-full h-full">

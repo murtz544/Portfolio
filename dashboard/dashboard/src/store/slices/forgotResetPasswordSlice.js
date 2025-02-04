@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { act } from 'react';
 
 const forgotResetPassSlice = createSlice({
     name: "forgotPassword",
