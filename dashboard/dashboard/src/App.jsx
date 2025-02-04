@@ -13,11 +13,13 @@ import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { getUser } from './store/slices/userSlice';
 import "./App.css";
+import { getAllMessages } from './store/slices/messagesSlice';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getAllMessages());
   }, []);
 
   return(
