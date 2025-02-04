@@ -213,7 +213,7 @@ const HomePage = () => {
               case "Add Project":
                 return <AddProject />;
                 break;
-              case "Add Skill":
+              case "Add Skills":
                 return <AddSkill />;
                 break;
               case "Add Application":
