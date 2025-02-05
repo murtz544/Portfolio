@@ -40,6 +40,21 @@ const skillSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        deleteSkillRequest(state, action){
+            state.message = null;
+            state.loading = true;
+            state.error = null;
+        },
+        deleteSkillSuccess(state, action){
+            state.message = action.payload;
+            state.loading = false;
+            state.error = null;
+        },
+        deleteSkillFailed(state, action){
+            state.message = null;
+            state.loading = false;
+            state.error = action.payload;
+        },
         resetSkillSlice(state, action){
             state.skills = state.skills;
             state.loading = false;
@@ -83,6 +98,22 @@ export const addNewSkill = (skills) => async (dispatch) => {
         dispatch(skillSlice.actions.addNewSkillFailed(error.response.data.message));
     }
 }
+
+export const deleteSkill = (id) => async (dispatch) => {
+    dispatch(skillSlice.actions.deleteSkillRequest());
+    try {
+        const response = await axios.delete(
+            `http://localhost:4000/api/v1/skill/delete/${id}`,
+            { withCredentials: true }
+        );
+        dispatch(skillSlice.actions.deleteSkillSuccess(response.data.message));
+        dispatch(skillSlice.actions.clearAllErrors());
+    } catch (error) {
+        dispatch(skillSlice.actions.deleteSkillFailed(error.response.data.message));
+    }
+};
+
+
 
 export const clearAllSkillErrors = () => (dispatch) => {
     dispatch(skillSlice.actions.clearAllErrors());
