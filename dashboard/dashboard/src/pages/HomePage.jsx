@@ -176,7 +176,7 @@ const HomePage = () => {
                   <PencilRuler className='h-5 w-5'/>
                   Add Skill
                 </Link>
-                <Link href="#" className={`flex items-center gap-4 px-2.5 ${active === "Add Application" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`} onClick={() => setActive("Add Application")}>
+                <Link href="#" className={`flex items-center gap-4 px-2.5 ${active === "Add Applications" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`} onClick={() => setActive("Add Application")}>
                   <LayoutGrid className='h-5 w-5'/>
                   Add Application
                 </Link>
@@ -216,7 +216,7 @@ const HomePage = () => {
               case "Add Skills":
                 return <AddSkill />;
                 break;
-              case "Add Application":
+              case "Add Applications":
                 return <AddApplication />;
                 break;
               case "Add Timeline":

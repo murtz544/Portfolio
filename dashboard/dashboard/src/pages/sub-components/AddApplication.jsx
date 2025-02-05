@@ -4,8 +4,7 @@ import { toast } from "react-toastify";
 import SpecialLoadingButton from "./SpecialLoadingButton";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Image, PhoneOutgoingIcon } from "lucide-react";
+import { addNewApplication, clearAllApplicationErrors, getAllApplications, resetApplicationSlice } from "@/store/slices/softwareApplicationSlice";
 
 const AddApplication = () => {
     const [name, setName] = useState("");
@@ -27,14 +26,20 @@ const AddApplication = () => {
     const handleAddNewApplication = (e) => {
         e.preventDefault();
         const formData = new FormData();
+        formData.append("name", name);
+        formData.append("svg", svg);
+        dispatch(addNewApplication(formData));
     }
     
         useEffect(() => {
             if (error) {
                 toast.error(error);
+                dispatch(clearAllApplicationErrors());
             }
             if (message) {
                 toast.success(message);
+                dispatch(resetApplicationSlice());
+                dispatch(getAllApplications());
             }
         }, [dispatch, loading, error]);
     return (
@@ -97,7 +102,7 @@ const AddApplication = () => {
                         {!loading ? (
                         <Button
                             type="submit"
-                            onClick={() => handleAddNewSkill()}
+                            onClick={() => handleAddNewApplication()}
                             className="w-full"
                         >
                             Add Application
