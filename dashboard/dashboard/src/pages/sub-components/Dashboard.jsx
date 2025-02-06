@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Progress } from "@/components/ui/progress";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -10,11 +11,12 @@ const Dashboard = () => {
     const { user } = useSelector((state) => state.user);
     const { projects } = useSelector((state) => state.project);
     const { skills } = useSelector((state) => state.skill);
+    const { softwareApplications } = useSelector((state) => state.softwareApplication);
     return (
         <>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
                 <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-2 xl:grid-cols-2">
-                    <div className="grid auto-rows-mac items-start gap-4 md:gap-8 lg:col-span-2">
+                    <div className="grid auto-rows-mac items-start gap-4 md:gap-8 lg:col-span-2">  
                         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
                             <Card className="sm:col-span-2">
                                 <CardHeader className="pb-3">
@@ -62,12 +64,108 @@ const Dashboard = () => {
                                             <TableHeader>
                                                 <TableRow>
                                                     <TableHead>Title</TableHead>
-                                                    <TableHead className="hidden md:table-cell">Stack</TableHead>
-                                                    <TableHead className="hidden md:table-cell">Deployed</TableHead>
+                                                    <TableHead className="md:table-cell">Stack</TableHead>
+                                                    <TableHead className="md:table-cell">Deployed</TableHead>
                                                     <TableHead className="md:table-cell">Update</TableHead>
                                                     <TableHead className="text-right">Visit</TableHead>
                                                 </TableRow>
                                             </TableHeader>
+                                            <TableBody>
+                                                {
+                                                    projects && projects.length > 0 ? (
+                                                        projects.map(element => {
+                                                            return(
+                                                                <TableRow className="bg-accent" key={element._id}>
+                                                                    <TableCell>
+                                                                        <div className="font-semibold">{element.title}</div>
+                                                                    </TableCell>
+                                                                    <TableCell className="md:table-cell">{element.stack}</TableCell>
+                                                                    <TableCell className="md:table-cell">{element.deployed}</TableCell>
+                                                                    <TableCell>
+                                                                        <Link to={`/update/project/${element._id}`}>
+                                                                            <Button>Update</Button>
+                                                                        </Link>
+                                                                    </TableCell>
+                                                                    <TableCell className="text-right">
+                                                                        <Link to={element.projectLink ? `${element.projectLink}` : ""}>
+                                                                            <Button>Visit</Button>
+                                                                        </Link>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            )
+                                                        })
+                                                    ) : (
+                                                        <TableRow>
+                                                            <TableCell className="text-3xl overflow-y-hidden">You have not added any project</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                }
+                                            </TableBody>
+                                        </Table>
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
+                        </Tabs>
+                        <br />
+                        <Tabs>
+                            <TabsContent>
+                                <Card>
+                                    <CardHeader className="px-7 gap-3">
+                                        <CardTitle>Skills</CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="grid sm:grid-cols-2 gap-4">
+                                        {
+                                            skills && skills.length > 0 ? (
+                                                skills.map(element => {
+                                                    return(
+                                                        <Card key={element._id}>
+                                                            <CardHeader>{element.title}</CardHeader>
+                                                            <CardFooter>
+                                                                <Progress value={element.proficiency} />
+                                                            </CardFooter>
+                                                        </Card>
+                                                    );
+                                                })
+                                            ) : 
+                                                <p className="text-3xl overflow-y-hidden">You have not added any Project</p>
+                                        }
+                                    </CardContent>
+                                </Card>
+                            </TabsContent>
+                        </Tabs>
+                        <br />
+                        <Tabs>
+                            <TabsContent className="grid min-[1050px]:grid-cols-2 gap-4">
+                                <Card>
+                                    <CardHeader className="px-7">
+                                        <CardTitle>Software Applications</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Table>
+                                            <TableHeader>
+                                                <TableRow>
+                                                    <TableHead>Name</TableHead>
+                                                    <TableHead className="md:table-cell">Icon</TableHead>
+                                                    <TableHead className="md:table-cell">Action</TableHead>
+                                                </TableRow>
+                                            </TableHeader>
+                                            <TableBody>
+                                                {
+                                                    softwareApplications && softwareApplications.length > 0 ? (
+                                                        softwareApplications.map(element => {
+                                                            return(
+                                                                <TableRow className="bg-accent" key={element._id}>
+                                                                    <TableCell>{element.name}</TableCell>
+                                                                    <TableCell><img src={element.svg && element.svg.url} alt={element.name} className="w-7 h-7"></img></TableCell>
+                                                                    <TableCell>
+                                                                        <Button>Delete</Button>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            )
+                                                        })
+                                                    ) : ""
+                                                }
+                                            </TableBody>
                                         </Table>
                                     </CardContent>
                                 </Card>
