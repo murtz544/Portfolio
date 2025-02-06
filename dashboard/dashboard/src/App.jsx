@@ -17,6 +17,7 @@ import { getAllMessages } from './store/slices/messagesSlice';
 import { getAllTimeline } from './store/slices/timelineSlice';
 import { getAllSkills } from './store/slices/skillSlice';
 import { getAllApplications } from './store/slices/softwareApplicationSlice';
+import { getAllProjects } from './store/slices/projectSlice';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const App = () => {
     dispatch(getAllTimeline());
     dispatch(getAllSkills());
     dispatch(getAllApplications());
+    dispatch(getAllProjects());
   }, []);
 
   return(

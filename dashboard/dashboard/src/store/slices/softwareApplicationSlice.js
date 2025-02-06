@@ -111,8 +111,6 @@ export const deleteApplication = (id) => async (dispatch) => {
     }
 };
 
-
-
 export const clearAllApplicationErrors = () => (dispatch) => {
     dispatch(softwareApplicationSlice.actions.clearAllErrors());
 };
