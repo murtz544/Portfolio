@@ -75,7 +75,7 @@ export const getAllTimeline = () => async(dispatch) => {
             "http://localhost:4000/api/v1/timeline/getall",
             { withCredentials: true }
         );
-        dispatch(timelineSlice.actions.getAllTimelineSuccess(data.timeline));
+        dispatch(timelineSlice.actions.getAllTimelineSuccess(data.timelines));
         dispatch(timelineSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(timelineSlice.actions.getAllTimelineFailed(error.response.data.message));
@@ -89,7 +89,7 @@ export const addNewTimeline = (timelineData) => async(dispatch) => {
             `http://localhost:4000/api/v1/timeline/add`, timelineData,
             { withCredentials: true, headers: { "Content-Type": "application/json" } }
         );
-        dispatch(timelineSlice.actions.addTimelineSuccess(data.timeline));
+        dispatch(timelineSlice.actions.addTimelineSuccess(data.message));
         dispatch(timelineSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(timelineSlice.actions.addTimelineFailed(error.response.data.message));
@@ -103,7 +103,7 @@ export const deleteTimeline = (id) => async(dispatch) => {
             `http://localhost:4000/api/v1/timeline/delete/${id}`,
             { withCredentials: true }
         );
-        dispatch(timelineSlice.actions.deleteTimelineSuccess(data.timeline));
+        dispatch(timelineSlice.actions.deleteTimelineSuccess(data.message));
         dispatch(timelineSlice.actions.clearAllErrors());
     } catch (error) {
         dispatch(timelineSlice.actions.deleteTimelineFailed(error.response.data.message));

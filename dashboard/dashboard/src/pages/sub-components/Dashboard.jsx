@@ -3,15 +3,38 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import React from "react";
-import { useSelector } from "react-redux";
+import { clearAllApplicationErrors, deleteApplication, getAllApplications, resetApplicationSlice } from "@/store/slices/softwareApplicationSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import SpecialLoadingButton from "./SpecialLoadingButton";
 
 const Dashboard = () => {
     const { user } = useSelector((state) => state.user);
     const { projects } = useSelector((state) => state.project);
     const { skills } = useSelector((state) => state.skill);
-    const { softwareApplications } = useSelector((state) => state.softwareApplication);
+    const { softwareApplications } = useSelector((state) => state.application);
+    const { timeline } = useSelector((state) => state.timeline);
+
+    const dispatch = useDispatch();
+    const [appId, setAppId] = useState("");
+    const handleDeleteSoftwareApp = (id) => {
+        setAppId(id);
+        dispatch(deleteApplication(id));
+    };
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch(clearAllApplicationErrors());
+        }
+        if (message) {
+            toast.success(message);
+            dispatch(resetApplicationSlice());
+            dispatch(getAllApplications());
+        }
+    }, [dispatch, error, message, lo]);
     return (
         <>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -158,12 +181,59 @@ const Dashboard = () => {
                                                                     <TableCell>{element.name}</TableCell>
                                                                     <TableCell><img src={element.svg && element.svg.url} alt={element.name} className="w-7 h-7"></img></TableCell>
                                                                     <TableCell>
-                                                                        <Button>Delete</Button>
+                                                                        {
+                                                                            loading && appId === element._id ? (<SpecialLoadingButton content={"Deleting"} width={"w-fit"}></SpecialLoadingButton>) : <Button onClick={() => handleDeleteSoftwareApp(element._id)}>Delete</Button>
+                                                                        }
+                                                                        
                                                                     </TableCell>
                                                                 </TableRow>
                                                             )
                                                         })
-                                                    ) : ""
+                                                    ) : (
+                                                        <TableRow>
+                                                            <TableCell className="text-3 overflow-y-hidden">You have not added any software.</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                }
+                                            </TableBody>
+                                        </Table>
+                                    </CardContent>
+                                </Card>
+                                <Card>
+                                    <CardHeader className="px-7 flex items-center justify-between flex-row">
+                                        <CardTitle>Timeline</CardTitle>
+                                        <Link to={"/manage/timeline"}>
+                                            <Button>Manage Timeline</Button>
+                                        </Link>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Table>
+                                            <TableHeader>
+                                                <TableRow>
+                                                    <TableHead>Title</TableHead>
+                                                    <TableHead>From</TableHead>
+                                                    <TableHead>To</TableHead>
+                                                </TableRow>
+                                            </TableHeader>
+                                            <TableBody>
+                                                {
+                                                    timeline && timeline.length > 0 ? (
+                                                      timeline.map(element => {
+                                                            return(
+                                                                <TableRow className="bg-accent" key={element._id}>
+                                                                    <TableCell className="font-medium">{element.title}</TableCell>
+                                                                    <TableCell className="md:table-cell">{element.timeline.from}</TableCell>
+                                                                    <TableCell className="md:table-cell text-right">{element.timeline.to ? `${element.timeline.to}` : "Present"}</TableCell>
+                                                                </TableRow>
+                                                            )
+                                                        })  
+                                                    ) : (
+                                                        <TableRow>
+                                                            <TableCell className="text-3xl overflow-y-hidden">
+                                                                You have not added any timeline.
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    )
                                                 }
                                             </TableBody>
                                         </Table>
