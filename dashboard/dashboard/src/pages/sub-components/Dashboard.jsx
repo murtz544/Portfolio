@@ -178,7 +178,9 @@ const Dashboard = () => {
                                                         softwareApplications.map(element => {
                                                             return(
                                                                 <TableRow className="bg-accent" key={element._id}>
-                                                                    <TableCell>{element.name}</TableCell>
+                                                                    <TableCell>
+                                                                        {element.name}
+                                                                    </TableCell>
                                                                     <TableCell><img src={element.svg && element.svg.url} alt={element.name} className="w-7 h-7"></img></TableCell>
                                                                     <TableCell>
                                                                         {
