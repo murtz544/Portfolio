@@ -14,7 +14,7 @@ const Dashboard = () => {
     const { user } = useSelector((state) => state.user);
     const { projects } = useSelector((state) => state.project);
     const { skills } = useSelector((state) => state.skill);
-    const { softwareApplications } = useSelector((state) => state.application);
+    const { softwareApplications, error, loading, message } = useSelector((state) => state.application);
     const { timeline } = useSelector((state) => state.timeline);
 
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Dashboard = () => {
             dispatch(resetApplicationSlice());
             dispatch(getAllApplications());
         }
-    }, [dispatch, error, message, lo]);
+    }, [dispatch, error, message, loading]);
     return (
         <>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
