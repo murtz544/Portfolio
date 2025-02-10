@@ -48,7 +48,7 @@ const Dashboard = () => {
                                     </CardDescription>
                                 </CardHeader>
                                 <CardFooter>
-                                    <Link to={user.portfolioURL && user.portfolioURL}>
+                                    <Link to={user.portfolioURL && user.portfolioURL} target="_blank">
                                         <Button>Visit Portfolio</Button>
                                     </Link>
                                 </CardFooter>
@@ -110,7 +110,7 @@ const Dashboard = () => {
                                                                         </Link>
                                                                     </TableCell>
                                                                     <TableCell className="text-right">
-                                                                        <Link to={element.projectLink ? `${element.projectLink}` : ""}>
+                                                                        <Link to={element.projectLink ? `${element.projectLink}` : ""} target="_blank">
                                                                             <Button>Visit</Button>
                                                                         </Link>
                                                                     </TableCell>

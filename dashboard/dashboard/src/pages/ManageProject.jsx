@@ -77,7 +77,7 @@ const ManageProject = () => {
                                                 </Link>
                                               </TooltipTrigger>
                                               <TooltipContent side="bottom">
-                                                Delete
+                                                View
                                               </TooltipContent>
                                             </Tooltip>
                                           </TooltipProvider>
