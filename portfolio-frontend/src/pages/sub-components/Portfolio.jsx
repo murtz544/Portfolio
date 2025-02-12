@@ -42,7 +42,7 @@ const Portfolio = () => {
                         )  
                     })
                 }
-            </div>
+            </div> 
             {
                 projects && projects.length > 9 && (
                     <div className="w-full text-center my-9">
