@@ -30,13 +30,13 @@ const Portfolio = () => {
                 {
                     viewAll ? projects && projects.map(element => {
                       return(
-                        <Link to={`/project/${element._id}`}>
+                        <Link to={`/project/${element._id}`} key={element._id}>
                             <img src={element.projectBanner && element.projectBanner.url} alt="project banner" />
                         </Link>
                       )  
                     }) : projects && projects.slice(0, 9).map(element => {
                     return(
-                        <Link to={`/project/${element._id}`}>
+                        <Link to={`/project/${element._id}`} key={element._id}>
                             <img src={element.projectBanner && element.projectBanner.url} alt="project banner" />
                         </Link>
                         )  

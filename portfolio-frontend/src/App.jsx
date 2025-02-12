@@ -4,7 +4,7 @@ import { ThemeProvider } from './components/theme-provider'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import ProjectView from './pages/ProjectView'
-import Footer from './pages/Footer'
+import Footer from './pages/sub-components/Footer'
 import { ToastContainer } from 'react-toastify'
 import { ModeToggle } from './components/mode-toggle'
 
