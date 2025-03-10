@@ -72,7 +72,7 @@ export const getAllApplications = () => async (dispatch) => {
     dispatch(softwareApplicationSlice.actions.getAllSoftwareApplicationsRequest());
     try {
         const {data} = await axios.get(
-            "http://localhost:4000/api/v1/softwareapplication/getall",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/softwareapplication/getall",
             { withCredentials: true }
         );
         dispatch(softwareApplicationSlice.actions.getAllSoftwareApplicationsSuccess(data.softwareApplications));
@@ -86,7 +86,7 @@ export const addNewApplication = (skills) => async (dispatch) => {
     dispatch(softwareApplicationSlice.actions.addNewSoftwareRequest());
     try {
         const response = await axios.post(
-            "http://localhost:4000/api/v1/softwareapplication/add",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/softwareapplication/add",
             skills,
             { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -101,7 +101,7 @@ export const deleteApplication = (id) => async (dispatch) => {
     dispatch(softwareApplicationSlice.actions.deleteApplicationRequest());
     try {
         const response = await axios.delete(
-            `http://localhost:4000/api/v1/softwareapplication/delete/${id}`,
+            `https://portfolio-backend-code-kwdg.onrender.com/api/v1/softwareapplication/delete/${id}`,
             { withCredentials: true }
         );
         dispatch(softwareApplicationSlice.actions.deleteApplicationSuccess(response.data.message));

@@ -67,7 +67,7 @@ export function LoginForm({className, ...props}) {
                   onChange={(e) => setPassword(e.target.value)} type="password" required />
               </div>
               {
-                !loading ? 
+                loading ? 
                     (<SpecialLoadingButton content={"Logging In"}/>) : 
                     (<Button type="submit" className="w-full" onClick={handleLogin}>
                         Login

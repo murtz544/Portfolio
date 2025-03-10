@@ -13,7 +13,7 @@ const Contact = () => {
     const handleSendMessage = async(e) => {
         e.preventDefault();
         setLoading(true);
-        await axios.post("http://localhost:4000/api/v1/message/send", { senderName, subject, message }, { withCredentials: true, headers : { "Content-Type": "application/json" } })
+        await axios.post("https://portfolio-backend-code-kwdg.onrender.com/api/v1/message/send", { senderName, subject, message }, { withCredentials: true, headers : { "Content-Type": "application/json" } })
         .then(res => {
             toast.success(res.data.message);
             setSenderName("");

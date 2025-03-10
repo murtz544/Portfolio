@@ -88,7 +88,7 @@ export const getAllProjects = () => async (dispatch) => {
     dispatch(projectSlice.actions.getAllProjectsRequest());
     try {
         const {data} = await axios.get(
-            "http://localhost:4000/api/v1/project/getall",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/project/getall",
             { withCredentials: true }
         );
         dispatch(projectSlice.actions.getAllProjectsSuccess(data.projects));
@@ -102,7 +102,7 @@ export const addNewProject = (project) => async (dispatch) => {
     dispatch(projectSlice.actions.addNewProjectRequest());
     try {
         const {data} = await axios.post(
-            "http://localhost:4000/api/v1/project/add",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/project/add",
             project,
             { withCredentials: true, headers: { "Content-Type": "multipart/form-data"} }
         );
@@ -117,7 +117,7 @@ export const deleteProject = (projectId) => async (dispatch) => {
     dispatch(projectSlice.actions.deleteProjectRequest());
     try {
         const {data} = await axios.delete(
-            `http://localhost:4000/api/v1/project/delete/${projectId}`,
+            `https://portfolio-backend-code-kwdg.onrender.com/api/v1/project/delete/${projectId}`,
             { withCredentials: true }
         );
         dispatch(projectSlice.actions.deleteProjectSuccess(data.message));
@@ -130,7 +130,7 @@ export const deleteProject = (projectId) => async (dispatch) => {
 export const updateProject = (id, newData) => async (dispatch) => {
     dispatch(projectSlice.actions.updateProjectRequest());
     try {
-        const { data } = await axios.put(`http://localhost:4000/api/v1/project/update/${id}`, newData, {
+        const { data } = await axios.put(`https://portfolio-backend-code-kwdg.onrender.com/api/v1/project/update/${id}`, newData, {
             withCredentials: true,
             headers: { "Content-Type": "multipart/form-data" }
         })

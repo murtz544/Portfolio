@@ -57,7 +57,7 @@ export const getAllMessages = () => async(dispatch) => {
     dispatch(messagesSlice.actions.getAllMessagesRequest());
     try {
         const {data} = await axios.get(
-            "http://localhost:4000/api/v1/message/getall",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/message/getall",
             { withCredentials: true }
         );
         dispatch(messagesSlice.actions.getAllMessagesSuccess(data.messages));
@@ -71,7 +71,7 @@ export const deleteMessages = (id) => async(dispatch) => {
     dispatch(messagesSlice.actions.deleteMessagesRequest());
     try {
         const {data} = await axios.delete(
-            `http://localhost:4000/api/v1/message/delete/${id}`,
+            `https://portfolio-backend-code-kwdg.onrender.com/api/v1/message/delete/${id}`,
             { withCredentials: true }
         );
         dispatch(messagesSlice.actions.deleteMessagesSuccess(data.message));

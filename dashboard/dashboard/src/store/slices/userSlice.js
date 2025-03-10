@@ -114,7 +114,7 @@ export const login = (email, password) => async (dispatch) => {
     dispatch(userSlice.actions.loginRequest());
     try {
         const { data } = await axios.post(
-            'http://localhost:4000/api/v1/user/login',
+            'https://portfolio-backend-code-kwdg.onrender.com/api/v1/user/login',
             { email, password },
             { withCredentials: true, headers: {"Content-Type": "application/json" }
         });
@@ -129,7 +129,7 @@ export const getUser = () => async (dispatch) => {
     dispatch(userSlice.actions.loadUserRequest());
     try {
         const { data } = await axios.get(
-            'http://localhost:4000/api/v1/user/me',
+            'https://portfolio-backend-code-kwdg.onrender.com/api/v1/user/me',
             {withCredentials: true});
         dispatch(userSlice.actions.loadUserSuccess(data.user));
         dispatch(userSlice.actions.clearAllErrors());
@@ -141,7 +141,7 @@ export const getUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         const { data } = await axios.get(
-            'http://localhost:4000/api/v1/user/logout',
+            'https://portfolio-backend-code-kwdg.onrender.com/api/v1/user/logout',
             {withCredentials: true});
         dispatch(userSlice.actions.logoutSuccess(data.message));
         dispatch(userSlice.actions.clearAllErrors());
@@ -154,7 +154,7 @@ export const updatePassword = (currentPassword, newPassword, confirmNewPassword)
     dispatch(userSlice.actions.updatePasswordRequest());
     try {
         const {data} = await axios.put(
-            "http://localhost:4000/api/v1/user/update/password",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/user/update/password",
             { currentPassword, newPassword, confirmNewPassword },
             { 
                 withCredentials: true,
@@ -172,7 +172,7 @@ export const updateProfile = (newData) => async(dispatch) => {
     dispatch(userSlice.actions.updateProfileRequest());
     try {
         const {data} = await axios.put(
-            "http://localhost:4000/api/v1/user/update/me",
+            "https://portfolio-backend-code-kwdg.onrender.com/api/v1/user/update/me",
             newData,
             { 
                 withCredentials: true,

@@ -17,7 +17,7 @@ const ProjectView = () => {
 
   useEffect(() => {
     const getProject = async () => {
-      await axios.get(`http://localhost:4000/api/v1/project/get/${id}`, { withCredentials: true })
+      await axios.get(`https://portfolio-backend-code-kwdg.onrender.com/api/v1/project/get/${id}`, { withCredentials: true })
         .then((res) => {
           console.log(res);
           setTitle(res.data.project.title);
