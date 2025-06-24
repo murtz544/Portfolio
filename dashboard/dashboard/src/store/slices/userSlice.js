@@ -69,8 +69,8 @@ const userSlice = createSlice({
             state.error = null;
         },
         updatePasswordSuccess(state, action){
-            state.loading = true;
-            state.isUpdated = false;
+            state.loading = false;
+            state.isUpdated = true;
             state.message = action.payload;
             state.error = null;
         },
@@ -87,8 +87,8 @@ const userSlice = createSlice({
             state.error = null;
         },
         updateProfileSuccess(state, action){
-            state.loading = true;
-            state.isUpdated = false;
+            state.loading = false;
+            state.isUpdated = true;
             state.message = action.payload;
             state.error = null;
         },
@@ -118,6 +118,15 @@ export const login = (email, password) => async (dispatch) => {
             { email, password },
             { withCredentials: true, headers: {"Content-Type": "application/json" }
         });
+
+        if (data.token) {
+            localStorage.setItem('authToken', data.token);
+            console.log('Token stored in localStorage');
+            console.log('Stored token:', localStorage.getItem('authToken'));
+        } else {
+            console.log('No token in response!');
+        }
+
         dispatch(userSlice.actions.loginSuccess(data.user));
         dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
