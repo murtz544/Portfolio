@@ -21,6 +21,7 @@ import { getAllProjects } from './store/slices/projectSlice';
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getUser());
     dispatch(getAllMessages());
